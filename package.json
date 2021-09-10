@@ -1,0 +1,20 @@
+{
+  "name": "fulll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js"
+  },
+  "imports": {
+    "#location": "./domain/location/index.js",
+    "#vehicle": "./domain/vehicle/index.js",
+    "#fleet": "./domain/fleet/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.3.1"
+  }
+}
