@@ -27,9 +27,5 @@ exports.Vehicle = class extends ValueObject {
         this._data = { ...this._data, location }
         return this.location
     }
-
-    toString() {
-        return JSON.stringify(this._data)
-    }
 }
 

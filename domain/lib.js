@@ -7,4 +7,8 @@ exports.ValueObject = class {
             _data[p] = opt[p]
         this._data = Object.freeze(_data)
     }
+
+    toString() {
+        return JSON.stringify(this._data)
+    }
 }

@@ -15,9 +15,5 @@ exports.Location = class extends ValueObject {
         return o && this.latitude == o.latitude
             && this.longitude == o.longitude
     }
-
-    toString() {
-        return JSON.stringify(this._data)
-    }
 }
 
