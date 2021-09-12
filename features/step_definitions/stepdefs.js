@@ -5,8 +5,6 @@ const { Fleet } = require('#fleet');
 const { Vehicle } = require('#vehicle');
 const { Location } = require('#location');
 
-const { timeStamp } = require('console');
-
 Given('my fleet', function () {
     this.fleet = new Fleet()
 });
@@ -20,7 +18,7 @@ When('I register this vehicle into my fleet', function () {
 });
 
 Then('this vehicle should be part of my vehicle fleet', function () {
-    assert(this.fleet.isVehicleRegistered(this.vehicle), "vehicle not in my fleet")
+    assert(this.fleet.isVehicleRegistered(this.vehicle))
 });
 
 Given('I have registered this vehicle into my fleet', function () {
@@ -32,7 +30,7 @@ When('I try to register this vehicle into my fleet', function () {
 });
 
 Then('I should be informed this this vehicle has already been registered into my fleet', function () {
-    assert.equal(this.response, false)
+    assert.equal(this.response, "Vehicle already registered")
 });
 
 Given('the fleet of another user', function () {
@@ -48,21 +46,21 @@ Given('a location', function () {
 });
 
 When('I park my vehicle at this location', function () {
-    this.known_location = this.fleet.parkVehicle(this.vehicle, this.location)
+    this.location = this.vehicle.parkAt(this.location)
 });
 
 Then('the known location of my vehicle should verify this location', function () {
-    assert(this.known_location, this.fleet.getVehicleLocation(this.vehicle))
+    assert(this.location, this.vehicle.location)
 });
 
 Given('my vehicle has been parked into this location', function () {
-    this.known_location = this.fleet.parkVehicle(this.vehicle, this.location)
+    this.location = this.vehicle.parkAt(this.location)
 });
 
 When('I try to park my vehicle at this location', function () {
-    this.known_location = this.fleet.parkVehicle(this.vehicle, this.location)
+    this.location = this.vehicle.parkAt(this.location)
 });
 
 Then('I should be informed that my vehicle is already parked at this location', function () {
-    assert.equal(this.known_location, false)
+    assert.equal(this.location, "Vehicle already at that location")
 });
