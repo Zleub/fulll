@@ -11,7 +11,10 @@ exports.Location = class extends ValueObject {
     get latitude() { return this._data.latitude }
     get longitude() { return this._data.longitude }
 
-    equals(o) { return deepEquals(LocationData).call(null, this, o) }
+    equals(o) {
+        return o && this.latitude == o.latitude
+            && this.longitude == o.longitude
+    }
 
     toString() {
         return JSON.stringify(this._data)

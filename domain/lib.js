@@ -1,3 +1,5 @@
+const { isObject } = require("util")
+
 exports.ValueObject = class {
     constructor(data, opt) {
         let _data = {}
@@ -6,6 +8,3 @@ exports.ValueObject = class {
         this._data = Object.freeze(_data)
     }
 }
-
-exports.deepEquals = (dataModel) => (a, b) =>
-    Object.keys(dataModel).reduce((p, k) => p && a._data[k] == b._data[k], true)
