@@ -5,8 +5,12 @@ const { Fleet } = require('#fleet');
 const { Vehicle } = require('#vehicle');
 const { Location } = require('#location');
 
-Given('my fleet', function () {
-    this.fleet = new Fleet()
+const { createFleet } = require('../../app/Commands')
+
+Given('my fleet', async function () {
+    this.fleet = await createFleet()
+
+    console.log(this.fleet)
 });
 
 Given('a vehicle', function () {
