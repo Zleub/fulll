@@ -1,23 +1,25 @@
 const { Duplex } = require('stream');
-const EventEmitter = require('events');
+const { create } = require('./lib')
 
-const { createFleetHandler } = require('./commandHandler.js');
+const {
+    createFleetHandler,
+    createVehicleHandler,
+    createLocationHandler,
+    registerVehicleInFleetHandler,
+    parkVehicleAtLocationHandler } = require('./commandHandler.js');
 
-let commandStream = new Duplex({ objectMode: true, read() { } })
+const commandStream = new Duplex({ objectMode: true, read() { } })
 
-commandStream.on('data', e => {
-    console.log('push in command stream')
-    let i = e.handler()
-    e.e.emit('done', i)
+commandStream.on('data', cmd => {
+    // console.log('push in command stream')
+    cmd.publisher.emit('done', cmd.handler())
 })
 
-const createCommand = (handler) => new Promise((res, rej) => {
-    let e = new EventEmitter()
-    e.on('done', (e) => res(e))
-    e.on('error', (e) => rej(e))
+const createCommand = create(commandStream)
 
-    commandStream.push({ handler, e })
-})
+exports.createFleet = createCommand(createFleetHandler)
+exports.createVehicle = createCommand(createVehicleHandler)
+exports.createLocation = createCommand(createLocationHandler)
 
-exports.createFleet = () => createCommand(createFleetHandler)
-exports.createFleet = () => createCommand(createFleetHandler)
+exports.registerVehicleInFleet = createCommand(registerVehicleInFleetHandler)
+exports.parkVehicleAtLocation = createCommand(parkVehicleAtLocationHandler)
