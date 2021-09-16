@@ -2,9 +2,8 @@ const { Fleets, Vehicles, Locations } = require("../infra/SystemRepository.js");
 
 exports.isVehicleRegisteredHandler = (fleetID, vehicleID) => {
     let fleet = Fleets[fleetID]
-    let vehicle = Vehicles[vehicleID]
 
-    return fleet.isVehicleRegistered(vehicle)
+    return fleet.isVehicleRegistered(vehicleID)
 }
 
 exports.getLocationHandler = (locationID) => {

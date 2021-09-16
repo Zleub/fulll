@@ -58,10 +58,9 @@ When('I park my vehicle at this location', function () {
 });
 
 Then('the known location of my vehicle should verify this location', async function () {
-    let know_location = await getLocation(this.location)
     let vehicle_location = await getVehicleLocation(this.vehicle)
 
-    assert.deepEqual(know_location, vehicle_location)
+    assert.deepEqual(this.location, vehicle_location)
 });
 
 Given('my vehicle has been parked into this location', function () {

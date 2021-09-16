@@ -9,14 +9,12 @@ exports.createLocationHandler = opt => Locations.push(new Location(opt)) - 1
 
 exports.registerVehicleInFleetHandler = (fleetID, vehicleID) => {
     let fleet = Fleets[fleetID]
-    let vehicle = Vehicles[vehicleID]
 
-    return fleet.registerVehicle(vehicle)
+    return fleet.registerVehicle(vehicleID)
 }
 
 exports.parkVehicleAtLocationHandler = (vehicleID, locationID) => {
     let vehicle = Vehicles[vehicleID]
-    let location = Locations[locationID]
 
-    return vehicle.parkAt(location)
+    return vehicle.parkAt(vehicleID)
 }

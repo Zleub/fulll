@@ -1,22 +1,24 @@
+const { ValueObject } = require('../lib')
 const { Vehicle } = require('#vehicle')
 
-const FleetData = [Vehicle]
+const FleetData = {
+    fleet: [Vehicle],
+    userID: Number
+}
 
-exports.Fleet = class {
-    constructor(...args) {
-        this._fleet = []
-        args.forEach(this.registerVehicle.bind(this))
-    }
+exports.Fleet = class extends ValueObject {
+    constructor(opt = { fleet: [] }) { super(FleetData, opt) }
 
-    get content() { return this._fleet }
+    get fleet() { return this._data.fleet }
+    get userID() { return this._data.userID }
 
     registerVehicle(v) {
-        if (FleetData.find(e => v instanceof e) && !this.isVehicleRegistered(v))
-            return this._fleet.push(v)
+        if (!this.isVehicleRegistered(v))
+            return this._data.fleet.push(v)
         return "Vehicle already registered"
     }
 
     isVehicleRegistered(o) {
-        return this._fleet.includes(o)
+        return this._data.fleet.includes(o)
     }
 }
