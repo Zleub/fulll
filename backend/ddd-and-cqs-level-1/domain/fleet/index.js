@@ -2,7 +2,7 @@ const { ValueObject } = require('../lib')
 const { Vehicle } = require('#vehicle')
 
 const FleetData = {
-    fleet: [Vehicle],
+    fleet: [Number],
     userID: Number
 }
 

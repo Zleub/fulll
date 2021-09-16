@@ -3,18 +3,18 @@ const { Vehicle } = require("#vehicle");
 const { Location } = require("#location");
 const { Fleets, Vehicles, Locations } = require("../infra/SystemRepository.js");
 
-exports.createFleetHandler = () => Fleets.push(new Fleet()) - 1
-exports.createVehicleHandler = opt => Vehicles.push(new Vehicle(opt)) - 1
-exports.createLocationHandler = opt => Locations.push(new Location(opt)) - 1
+exports.createFleetHandler = () => Fleets.insert(new Fleet())
+exports.createVehicleHandler = opt => Vehicles.insert(new Vehicle(opt))
+exports.createLocationHandler = opt => Locations.insert(new Location(opt))
 
 exports.registerVehicleInFleetHandler = (fleetID, vehicleID) => {
-    let fleet = Fleets[fleetID]
+    let fleet = Fleets.get(fleetID)
 
     return fleet.registerVehicle(vehicleID)
 }
 
 exports.parkVehicleAtLocationHandler = (vehicleID, locationID) => {
-    let vehicle = Vehicles[vehicleID]
+    let vehicle = Vehicles.get(vehicleID)
 
     return vehicle.parkAt(vehicleID)
 }

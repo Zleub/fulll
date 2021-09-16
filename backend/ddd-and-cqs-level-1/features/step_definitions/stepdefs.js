@@ -10,7 +10,6 @@ const {
 
 const {
     isVehicleRegistered,
-    getLocation,
     getVehicleLocation } = require('../../app/Queries')
 
 Given('my fleet', async function () {
