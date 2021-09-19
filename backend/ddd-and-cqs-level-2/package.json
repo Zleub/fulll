@@ -9,7 +9,8 @@
   "imports": {
     "#location": "./domain/location/index.js",
     "#vehicle": "./domain/vehicle/index.js",
-    "#fleet": "./domain/fleet/index.js"
+    "#fleet": "./domain/fleet/index.js",
+    "#commands": "./app/Commands.js"
   },
   "keywords": [],
   "author": "",
