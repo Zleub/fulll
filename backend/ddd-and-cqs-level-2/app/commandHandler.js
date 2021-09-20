@@ -1,7 +1,7 @@
 const { Fleet } = require("#fleet");
 const { Vehicle } = require("#vehicle");
 const { Location } = require("#location");
-const { Fleets, Vehicles, Locations } = require("../infra/SystemRepository.js");
+const { Fleets, Vehicles, Locations } = require("../infra/MongoRepository.js");
 
 const { getFleet,
     getVehicleByID,
@@ -9,18 +9,22 @@ const { getFleet,
     isVehicleRegistered } = require('./Queries')
 const { createLocation } = require('./Commands')
 
-exports.createFleetHandler = opt => Fleets.insert(new Fleet(opt))
-exports.createVehicleHandler = opt => Vehicles.insert(new Vehicle(opt))
-exports.createLocationHandler = opt => Locations.insert(new Location(opt))
+exports.createFleetHandler = async opt => await Fleets.insert(new Fleet(opt))
+exports.createVehicleHandler = async opt => await Vehicles.insert(new Vehicle(opt))
+exports.createLocationHandler = async opt => await Locations.insert(new Location(opt))
 
 exports.registerVehicleInFleetHandler = async (fleetID, vehicleID) => {
     let fleet = await getFleet(fleetID)
-    return fleet.registerVehicle(vehicleID)
+    let res = fleet.registerVehicle(vehicleID)
+    await Fleets.update(fleetID, fleet)
+    return res
 }
 
 exports.parkVehicleAtLocationHandler = async (vehicleIndex, locationID) => {
     let vehicle = await getVehicleByIndex(vehicleIndex)
-    return vehicle.parkAt(locationID)
+    let _ = vehicle.parkAt(locationID)
+    Vehicles.update(vehicleIndex, vehicle)
+    return _
 }
 
 exports.parkVehicleFromFleetAtLocationHandler = async (fleetID, vehicleID, latitude, longitude, altitude) => {

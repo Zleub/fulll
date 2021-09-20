@@ -2,9 +2,11 @@ const { ValueObject } = require('../lib')
 const { Vehicle } = require('#vehicle')
 
 const FleetData = {
-    fleet: [Number],
-    userID: Number
+    fleet: [String],
+    userID: String
 }
+
+exports.FleetData = FleetData
 
 exports.Fleet = class extends ValueObject {
     constructor(opt = { fleet: [] }) { super(FleetData, opt) }

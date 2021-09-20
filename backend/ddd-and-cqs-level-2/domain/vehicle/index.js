@@ -5,7 +5,7 @@ const VehicleData = {
     id: String,
     type: String,
 
-    location: Number
+    location: String
 }
 
 exports.VehicleData = VehicleData

@@ -1,8 +1,8 @@
-const { Fleets, Vehicles, Locations } = require("../infra/SystemRepository.js");
+const { Fleet } = require('#fleet')
+const { Fleets, Vehicles, Locations } = require("../infra/MongoRepository.js");
 
-exports.isVehicleRegisteredHandler = (fleetID, vehicleID) => {
-    let fleet = Fleets.get(fleetID)
-
+exports.isVehicleRegisteredHandler = async (fleetID, vehicleID) => {
+    let fleet = await Fleets.get(fleetID)
     return fleet.isVehicleRegistered(vehicleID)
 }
 
@@ -22,8 +22,7 @@ exports.getFleetHandler = (FleetID) => {
     return Fleets.get(FleetID)
 }
 
-exports.getVehicleLocationHandler = (vehicleID) => {
-    let vehicle = Vehicles.get(vehicleID)
-
+exports.getVehicleLocationHandler = async (vehicleID) => {
+    let vehicle = await Vehicles.get(vehicleID)
     return vehicle.location
 }
