@@ -8,6 +8,8 @@ const VehicleData = {
     location: Number
 }
 
+exports.VehicleData = VehicleData
+
 exports.Vehicle = class extends ValueObject {
     constructor(opt = {}) { super(VehicleData, opt) }
 
