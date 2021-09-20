@@ -17,23 +17,23 @@ Given('my fleet', async function () {
 });
 
 Given('a vehicle', async function () {
-    this.vehicle = await createVehicle({ type: 'car' })
+    this.vehicleIndex = await createVehicle({ type: 'car' })
 });
 
 When('I register this vehicle into my fleet', async function () {
-    registerVehicleInFleet(this.fleet, this.vehicle)
+    registerVehicleInFleet(this.fleet, this.vehicleIndex)
 });
 
 Then('this vehicle should be part of my vehicle fleet', async function () {
-    assert(await isVehicleRegistered(this.fleet, this.vehicle))
+    assert(await isVehicleRegistered(this.fleet, this.vehicleIndex))
 });
 
 Given('I have registered this vehicle into my fleet', function () {
-    registerVehicleInFleet(this.fleet, this.vehicle)
+    registerVehicleInFleet(this.fleet, this.vehicleIndex)
 });
 
 When('I try to register this vehicle into my fleet', async function () {
-    this.response = await registerVehicleInFleet(this.fleet, this.vehicle)
+    this.response = await registerVehicleInFleet(this.fleet, this.vehicleIndex)
 });
 
 Then('I should be informed this this vehicle has already been registered into my fleet', function () {
@@ -45,7 +45,7 @@ Given('the fleet of another user', async function () {
 });
 
 Given('this vehicle has been registered into the other user\'s fleet', function () {
-    registerVehicleInFleet(this.another_fleet, this.vehicle)
+    registerVehicleInFleet(this.another_fleet, this.vehicleIndex)
 });
 
 Given('a location', async function () {
@@ -53,21 +53,21 @@ Given('a location', async function () {
 });
 
 When('I park my vehicle at this location', function () {
-    parkVehicleAtLocation(this.vehicle, this.location)
+    parkVehicleAtLocation(this.vehicleIndex, this.location)
 });
 
 Then('the known location of my vehicle should verify this location', async function () {
-    let vehicle_location = await getVehicleLocation(this.vehicle)
+    let vehicle_location = await getVehicleLocation(this.vehicleIndex)
 
     assert.deepEqual(this.location, vehicle_location)
 });
 
 Given('my vehicle has been parked into this location', function () {
-    parkVehicleAtLocation(this.vehicle, this.location)
+    parkVehicleAtLocation(this.vehicleIndex, this.location)
 });
 
 When('I try to park my vehicle at this location', async function () {
-    this.location = await parkVehicleAtLocation(this.vehicle, this.location)
+    this.location = await parkVehicleAtLocation(this.vehicleIndex, this.location)
 });
 
 Then('I should be informed that my vehicle is already parked at this location', function () {

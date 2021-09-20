@@ -18,8 +18,8 @@ exports.registerVehicleInFleetHandler = async (fleetID, vehicleID) => {
     return fleet.registerVehicle(vehicleID)
 }
 
-exports.parkVehicleAtLocationHandler = async (vehicleID, locationID) => {
-    let vehicle = await getVehicleByID(vehicleID)
+exports.parkVehicleAtLocationHandler = async (vehicleIndex, locationID) => {
+    let vehicle = await getVehicleByIndex(vehicleIndex)
     return vehicle.parkAt(locationID)
 }
 
