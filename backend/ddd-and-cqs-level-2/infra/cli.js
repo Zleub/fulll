@@ -9,16 +9,16 @@ const programs = {
     'vehicle': new Command()
 }
 
-programs.vehicle.command('create <vehicleID>')
-    .description('Create a vehicle with a specific ID')
-    .action(async (vehicleID) => console.log(await createVehicle({ id: vehicleID })))
+programs.vehicle.command('create <vehiclePlate>')
+    .description('Create a vehicle with a specific plate number')
+    .action(async (vehiclePlate) => console.log(await createVehicle({ plate: vehiclePlate })))
 
 programs.fleet.command('create <userID>')
     .description('Create a fleet for a specific user')
     .action(async (userID) => console.log(await createFleet({ userID })))
 
 programs.fleet.command('register-vehicle <fleetId> <vehiclePlateNumber>')
-    .description('Register a into a specific fleet')
+    .description('Register a vehicle into a specific fleet')
     .action(async (fleetId, vehiclePlateNumber) => console.log(await registerVehicleInFleet(fleetId, vehiclePlateNumber)))
 
 programs.fleet.command('localize-vehicle <fleetId> <vehiclePlateNumber> lat lng [alt]')
@@ -39,8 +39,10 @@ Object.keys(programs).forEach(k => {
 
 main.showHelpAfterError()
 
+const mongoose = require('mongoose')
+
+const client = mongoose.connect('mongodb://localhost:27017/test')
 const readline = require('readline')
-const { inspect } = require('util')
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -53,8 +55,8 @@ rl.on('line', function (line) {
 })
 
 rl.on('close', function (line) {
-    let repo = require('./SystemRepository.js')
-
-    console.log(require('util').inspect(repo, false, null, true))
+    let args = line.split(/\s+/)
+    main.parse([...process.argv, ...args])
+    client.connection.close()
 })
 
