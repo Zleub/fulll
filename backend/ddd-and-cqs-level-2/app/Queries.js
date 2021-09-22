@@ -4,8 +4,7 @@ const { create } = require('./lib')
 const {
     isVehicleRegisteredHandler,
     getLocationHandler,
-    getVehicleByIndexHandler,
-    getVehicleByIDHandler,
+    getVehicleHandler,
     getFleetHandler,
     getVehicleLocationHandler } = require('./queryHandler')
 
@@ -24,7 +23,6 @@ const createQuery = create(queryStream)
 exports.isVehicleRegistered = createQuery(isVehicleRegisteredHandler)
 
 exports.getLocation = createQuery(getLocationHandler)
-exports.getVehicleByIndex = createQuery(getVehicleByIndexHandler)
-exports.getVehicleByID = createQuery(getVehicleByIDHandler)
+exports.getVehicle = createQuery(getVehicleHandler)
 exports.getFleet = createQuery(getFleetHandler)
 exports.getVehicleLocation = createQuery(getVehicleLocationHandler)

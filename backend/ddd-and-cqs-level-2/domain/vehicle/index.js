@@ -2,9 +2,8 @@ const { ValueObject } = require('../lib')
 const { Location } = require('#location')
 
 const VehicleData = {
-    id: String,
+    _id: String,
     type: String,
-
     location: String
 }
 
@@ -13,12 +12,12 @@ exports.VehicleData = VehicleData
 exports.Vehicle = class extends ValueObject {
     constructor(opt = {}) { super(VehicleData, opt) }
 
-    get id() { return this._data.id }
+    get _id() { return this._data._id }
     get type() { return this._data.type }
     get location() { return this._data.location }
 
     equals(o) {
-        return o && this.id == o.id
+        return o && this._id == o._id
             && this.type == o.type
             && this.location == o.location
     }
