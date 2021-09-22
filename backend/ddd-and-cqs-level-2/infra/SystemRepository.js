@@ -1,18 +1,29 @@
+const { Fleet, FleetData } = require('#fleet')
+const { Vehicle, VehicleData } = require('#vehicle')
+const { Location, LocationData } = require('#location')
+
 class Repository {
-    constructor() {
+    constructor(name, data, _class) {
         this._data = []
+        this.name = name
+        this._class = _class
     }
 
     insert(e) {
-        this._data.push(e)
+        this._data.push(e._data)
         return this._data.indexOf(e)
     }
 
+    async update(id, e) {
+        this._data[id] = e._data
+        return id
+    }
+
     get(i) {
-        return this._data[i]
+        return new this._class(this._data[i])
     }
 }
 
-exports.Fleets = new Repository()
-exports.Vehicles = new Repository()
-exports.Locations = new Repository()
+exports.Fleets = new Repository('Fleet', FleetData, Fleet)
+exports.Vehicles = new Repository('Vehicle', VehicleData, Vehicle)
+exports.Locations = new Repository('Location', LocationData, Location)
