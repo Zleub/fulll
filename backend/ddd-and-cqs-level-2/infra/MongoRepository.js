@@ -12,22 +12,20 @@ class Repository {
     }
 
     async insert(e) {
-        const doc = new this.model(e)
-        Object.assign(doc, e._data)
-        // console.log(`${this.name}, insert`, e, doc)
+        const doc = new this.model(e._data)
         await doc.save()
         return doc._id
     }
 
     async update(id, e) {
-        // console.log(`${this.name}, update`, id, e)
         await this.model.updateOne({ _id: id }, e._data)
         return id
     }
 
     async get(id) {
         let data = await this.model.findById(id)
-        // console.log(`${this.name}, get`, data)
+        if (data == null)
+            throw `${this.name} with ID #${id} not found`
         return new this._class(data)
     }
 }
