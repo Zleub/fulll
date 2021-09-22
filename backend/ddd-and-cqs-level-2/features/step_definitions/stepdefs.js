@@ -26,7 +26,8 @@ Given('my fleet', async function () {
 });
 
 Given('a vehicle', async function () {
-    this.vehicleIndex = await createVehicle({ type: 'car' })
+    let plateNumber = Math.floor(Math.random() * 120) + '-' + Math.floor(Math.random() * 4200)
+    this.vehicleIndex = await createVehicle({ _id: plateNumber, type: 'car' })
 });
 
 When('I register this vehicle into my fleet', async function () {
